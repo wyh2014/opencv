@@ -62,5 +62,8 @@
     <Image Include="res\opencv.ico">
       <Filter>资源文件</Filter>
     </Image>
+    <Image Include="..\..\..\..\..\Desktop\threshold.PNG">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

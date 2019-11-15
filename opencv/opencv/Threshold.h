@@ -29,28 +29,29 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedPath0();
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
-	void DisplayZoom(Mat image, Size window);
+	void DisplayZoom(Mat image, Size window, String window_name);
 
-	Size m_window;
-	Mat m_image;
+	Size m_window0, m_window1;
+	Mat m_image0, m_image1;
 	int m_type;
-	CEdit m_path;
-	CEdit m_threshold;
-	afx_msg void OnChangeEdit2();
-	CSliderCtrl m_slider;
-	afx_msg void OnCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult);
-	afx_msg void OnBnClickedRadio3();
+	CEdit m_threshold0;
+	afx_msg void OnChangeThreshold0();
+	CSliderCtrl m_threshold1;
+	afx_msg void OnCustomdrawThresold1(NMHDR *pNMHDR, LRESULT *pResult);
+	CButton m_radio1;
 	afx_msg void OnBnClickedRadio1();
 	afx_msg void OnBnClickedRadio2();
+	afx_msg void OnBnClickedRadio3();
 	afx_msg void OnBnClickedRadio4();
 	afx_msg void OnBnClickedRadio5();
 	afx_msg void OnBnClickedRadio6();
 	afx_msg void OnBnClickedRadio7();
 	afx_msg void OnBnClickedRadio8();
-	CButton m_button;
+	
+	
 };
 
 extern Threshold g_Threshold;
