@@ -185,6 +185,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FindContours.h" />
     <ClInclude Include="opencv.h" />
     <ClInclude Include="opencvDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Threshold.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FindContours.cpp" />
     <ClCompile Include="opencv.cpp" />
     <ClCompile Include="opencvDlg.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -211,7 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\threshold.PNG" />
+    <Image Include="res\findContours.PNG" />
     <Image Include="res\opencv.ico" />
+    <Image Include="res\threshold.PNG" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

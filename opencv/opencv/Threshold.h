@@ -21,7 +21,7 @@ public:
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_THRESHOLD };
+	enum { IDD = IDD_MAIN_THRESHOLD };
 #endif
 
 protected:

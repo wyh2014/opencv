@@ -7,6 +7,7 @@
 #include "opencvDlg.h"
 #include "afxdialogex.h"
 #include "Threshold.h"
+#include "FindContours.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -18,7 +19,7 @@
 
 
 CopencvDlg::CopencvDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_OPENCV_DIALOG, pParent)
+	: CDialogEx(IDD_MAIN, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -31,7 +32,8 @@ void CopencvDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CopencvDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_THRESHOLD, &CopencvDlg::OnBnClickedThreshold)
+	ON_BN_CLICKED(IDC_MAIN_TH, &CopencvDlg::OnBnClickedTh)
+	ON_BN_CLICKED(IDC_MAIN_FC, &CopencvDlg::OnBnClickedMainFc)
 END_MESSAGE_MAP()
 
 
@@ -47,8 +49,10 @@ BOOL CopencvDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
-	g_Threshold.Create(MAKEINTRESOURCE(IDD_THRESHOLD));
+	g_Threshold.Create(MAKEINTRESOURCE(IDD_MAIN_THRESHOLD));
 	g_Threshold.ShowWindow(SW_HIDE);
+	g_FindContours.Create(MAKEINTRESOURCE(IDD_MAIN_FINDCONTOURS));
+	g_FindContours.ShowWindow(SW_HIDE);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -91,8 +95,15 @@ HCURSOR CopencvDlg::OnQueryDragIcon()
 
 
 
-void CopencvDlg::OnBnClickedThreshold()
+void CopencvDlg::OnBnClickedTh()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	g_Threshold.ShowWindow(SW_SHOW);
+}
+
+
+void CopencvDlg::OnBnClickedMainFc()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	g_FindContours.ShowWindow(SW_SHOW);
 }

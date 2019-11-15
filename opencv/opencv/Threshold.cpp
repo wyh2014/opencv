@@ -12,7 +12,7 @@ Threshold g_Threshold = new Threshold;//阈值界面
 IMPLEMENT_DYNAMIC(Threshold, CDialogEx)
 
 Threshold::Threshold(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_THRESHOLD, pParent)
+	: CDialogEx(IDD_MAIN_THRESHOLD, pParent)
 {
 
 }
@@ -64,18 +64,18 @@ BOOL Threshold::OnInitDialog()
 
 	HWND hWnd, hParent;
 	CRect rect;
-	namedWindow("image0");
-	hWnd = (HWND)cvGetWindowHandle("image0");// MFC嵌套opencv窗口
+	namedWindow("th_image0");
+	hWnd = (HWND)cvGetWindowHandle("th_image0");// MFC嵌套opencv窗口
 	hParent = ::GetParent(hWnd);
 	::SetParent(hWnd, GetDlgItem(IDC_TH_IMAGE0)->m_hWnd);
 	::ShowWindow(hParent, SW_HIDE);
 	GetDlgItem(IDC_TH_IMAGE0)->GetClientRect(&rect);
 	m_window0 = Size(rect.right - rect.left - 2, rect.bottom - rect.top - 2);//获取图像窗口大小
 	m_image0 = imread("res//threshold.PNG", 1);
-	DisplayZoom(m_image0, m_window0, "image0");
+	DisplayZoom(m_image0, m_window0, "th_image0");
 
-	namedWindow("image1");
-	hWnd = (HWND)cvGetWindowHandle("image1");// MFC嵌套opencv窗口
+	namedWindow("th_image1");
+	hWnd = (HWND)cvGetWindowHandle("th_image1");// MFC嵌套opencv窗口
 	hParent = ::GetParent(hWnd);
 	::SetParent(hWnd, GetDlgItem(IDC_TH_IMAGE1)->m_hWnd);
 	::ShowWindow(hParent, SW_HIDE);
@@ -83,7 +83,7 @@ BOOL Threshold::OnInitDialog()
 	m_window1 = Size(rect.right - rect.left - 2, rect.bottom - rect.top - 2);//获取图像窗口大小
 	
 	Mat zero = Mat::Mat(m_window1, CV_8UC3, Scalar(255, 255, 255));//定义一个与图片控件一样大的空白图片
-	imshow("image1", zero);
+	imshow("th_image1", zero);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 异常: OCX 属性页应返回 FALSE
@@ -113,7 +113,7 @@ void Threshold::DisplayZoom(Mat image, Size window, String window_name)
 			resize(image, image_zoom, Size(), zoom, zoom, INTER_LINEAR);//放大图片
 		}
 		Mat zero = Mat::Mat(window, CV_8UC3, Scalar(255, 255, 255));//定义一个与图片控件一样大的黑色空白图片
-		if (window_name == "image1") {
+		if (window_name == "th_image1") {//窗口"th_image1"显示二值化后的图片，其本身是灰度图
 			cvtColor(zero, zero, COLOR_BGR2GRAY);
 		}
 		Mat roi(zero, Rect(0, 0, image_zoom.cols, image_zoom.rows));
@@ -137,8 +137,8 @@ void Threshold::OnBnClickedPath0()
 		string path = CT2A(name);// CString转string
 		GetDlgItem(IDC_TH_PATH1)->SetWindowText(name);
 		m_image1 = imread(path); //读取图片
-		DisplayZoom(m_image1, m_window0, "image0");
-		DisplayZoom(m_image1, m_window1, "image1");
+		DisplayZoom(m_image1, m_window0, "th_image0");
+		DisplayZoom(m_image1, m_window1, "th_image1");
 		m_threshold1.SetPos(150);//当前停留的位置
 		OnChangeThreshold0();
 	}
@@ -161,7 +161,7 @@ void Threshold::OnChangeThreshold0()
 			Mat image_gray, image_result;
 			cvtColor(m_image1, image_gray, COLOR_BGR2GRAY);
 			threshold(image_gray, image_result, th, 255, m_type);
-			DisplayZoom(image_result, m_window1, "image1");
+			DisplayZoom(image_result, m_window1, "th_image1");
 		}
 	}
 	else if (th > 255) {
